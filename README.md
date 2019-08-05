@@ -36,7 +36,7 @@ Hello, World! from user `MichaelCduBois`
 ``` python 3
 from WhPy import discord
 
-# Discord WebHook Parameters
+# Discord Webhook Parameters
 webhook_channel_id = "1234"
 webhook_token = "567890"
 
@@ -48,4 +48,40 @@ hook.message(content="Hello, World!", username="MichaelCduBois")
 
 #Executes the Webhook
 hook.execute()
+```
+
+Hello, World! Text-to-Speech Message
+
+``` python 3
+from WhPy import discord
+
+# Discord Webhook URL
+webhook_url = "https://discordapp.com/api/webhooks/1234/567890"
+
+# Creats Discord Instance
+hook = discord.webhook(url=webhook_url)
+
+# Sets Message content as a Text-to-Speech Message
+hook.message(content="Hello, World!", tts=True)
+
+# Executes the Webhook
+hook.execute()
+```
+
+Return message confirmation as JSON Object
+
+``` python 3
+from WhPy import discord
+
+# Discord Webhook URL
+webhook_url = "https://discordapp.com/api/webhooks/1234/567890"
+
+# Creats Discord Instance
+hook = discord.webhook(url=webhook_url)
+
+# Sets Message Content
+hook.message(content="Hello, World!")
+
+# Executes the Webhook
+hook.execute(wait=True)
 ```
