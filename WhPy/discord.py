@@ -60,11 +60,11 @@ class Webhook:
         self.username = None if username is None else str(username)
         self.avatar_url = None if avatar_url is None else str(avatar_url)
 
-    def execute(self):
+    def execute(self, wait=False):
         """
         Executes the Discord Webhook
         Keyword Arguments:
-        None
+        wait -- boolean -- True returns json verifying message
         """
         try:
 
@@ -85,5 +85,7 @@ class Webhook:
         json_data["content"] = self.content
         json_data["username"] = self.username
         json_data["avatar_url"] = self.avatar_url
+
+        url = f"{ url }?wait=true" if wait is True else url
 
         return requests.post(url, headers=header, json=json_data)

@@ -269,6 +269,20 @@ def test_execute_content():
     assert d.execute().status_code == 204
 
 
+def test_execute_wait():
+    """
+    Test that execute(wait=True) returns JSON
+    """
+    d = discord.Webhook(channel_id=channel_id, token=token)
+
+    d.message(content=str_msg)
+
+    hook = d.execute(wait=True)
+
+    assert hook.status_code == 200
+    assert hook.json()["content"] == str_msg
+
+
 def test_execute_username():
     """
     Test that execute overrides username
