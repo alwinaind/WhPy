@@ -230,6 +230,20 @@ def test_integer_avatar_url():
     assert type(d.avatar_url) is str, "The argument avatar_url should be str"
 
 
+def test_message_tts():
+    """
+    Tests Discord TTS option
+    """
+    d = discord.Webhook(channel_id=channel_id, token=token)
+
+    d.message(content=str_msg, tts=True)
+
+    hook = d.execute(wait=True)
+
+    assert hook.status_code == 200
+    assert hook.json()["tts"] is True
+
+
 def test_empty_execute_before_message():
     """
     Tests an empty execute call before message call returns TypeError

@@ -48,7 +48,7 @@ class Webhook:
 
             raise ValueError(f"Webhook authorization error: { message }")
 
-    def message(self, content=None, username=None, avatar_url=None):
+    def message(self, content=None, username=None, avatar_url=None, tts=False):
         """
         Generates Message JSON
         Keyword Arguments:
@@ -59,6 +59,7 @@ class Webhook:
         self.content = None if content is None else str(content)
         self.username = None if username is None else str(username)
         self.avatar_url = None if avatar_url is None else str(avatar_url)
+        self.tts = True if tts is True else False
 
     def execute(self, wait=False):
         """
@@ -85,6 +86,7 @@ class Webhook:
         json_data["content"] = self.content
         json_data["username"] = self.username
         json_data["avatar_url"] = self.avatar_url
+        json_data["tts"] = self.tts
 
         url = f"{ url }?wait=true" if wait is True else url
 
