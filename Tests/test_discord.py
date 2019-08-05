@@ -18,7 +18,8 @@ int_msg = 12345
 str_username = "MichaelCduBois"
 int_username = 208
 
-str_avatar_url = "https://www.example.com"
+str_avatar_url = "https://www.python.org/static/community_logos/"\
+    "python-powered-h-140x182.png"
 int_avatar_url = 67890
 
 
@@ -264,5 +265,27 @@ def test_execute_content():
     d = discord.Webhook(channel_id=channel_id, token=token)
 
     d.message(content=str_msg)
+
+    assert d.execute().status_code == 204
+
+
+def test_execute_username():
+    """
+    Test that execute overrides username
+    """
+    d = discord.Webhook(channel_id=channel_id, token=token)
+
+    d.message(content=str_msg, username=str_username)
+
+    assert d.execute().status_code == 204
+
+
+def test_execute_avatar_url():
+    """
+    Test that execute overrides avatar_url
+    """
+    d = discord.Webhook(channel_id=channel_id, token=token)
+
+    d.message(content=str_msg, avatar_url=str_avatar_url)
 
     assert d.execute().status_code == 204
