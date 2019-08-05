@@ -1,11 +1,11 @@
-# WhPy
+# WhPy - Webhook Python
 
 [![PyPI](https://img.shields.io/pypi/v/WhPy)](https://pypi.org/project/WhPy/)
 [![PyPI - License](https://img.shields.io/pypi/l/WhPy)](https://pypi.org/project/WhPy/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/WhPy)](https://pypi.org/project/WhPy/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/WhPy)](https://pypi.org/project/WhPy/)
 
-Python 3 webhook module for interacting with various chat applications via established webhooks.
+Webhook Python is a Python 3 module for interacting with various chat applications via established webhooks.
 
 ## Installation
 
