@@ -14,6 +14,7 @@ Python 3 webhook module for interacting with various chat applications via estab
 ## Code Examples
 
 Hello, World!
+
 ``` python 3
 from WhPy import discord
 
@@ -31,6 +32,7 @@ hook.execute()
 ```
 
 Hello, World! from user `MichaelCduBois`
+
 ``` python 3
 from WhPy import discord
 
