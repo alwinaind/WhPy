@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="WhPy",
-    version="0.1.0",
+    version="0.1.1",
     author="Michael duBois",
     author_email="mdubois@mcduboiswebservices.com",
     description="A Python 3 webhook module.",
