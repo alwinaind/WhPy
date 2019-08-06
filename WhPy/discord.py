@@ -2,19 +2,28 @@ import requests
 
 
 class Webhook:
-    """
-    Establishes communication with Discord Webhooks
+    """This is a class to send messages via a Discord Webhook.
+
+    Attributes:
+        discord_endpoint (string): Discord's Webhook API Endpoint
     """
     global discord_endpoint
     discord_endpoint = "https://discordapp.com/api/webhooks"
 
     def __init__(self, url=None, channel_id=None, token=None):
-        """
-        Initializes discord class
-        Keyword Arguments:
-        url -- string -- Discord Webhook URL
-        channel_id -- string -- Discord Channel ID
-        token -- string -- Discord Webhook Token
+        """The constructor for Webhook class.
+
+        Parameters:
+            url (string): Webhook URL from Discord.
+            channel_id (string): Webhook channel_id taken from Webhook URL.
+            token (string): webhook token taken from Webhook URL.
+
+            *REQUIRES* url or channel_id and token to be set.
+
+        Instance Attributes:
+            embeds (list): Embed objects to be included in Discord message.
+            channel_id (string): Channel ID of the Discord Webhook.
+            token (string): Token of the Discord Webhook.
         """
         # Sets embeds to use with embeds() call
         self.embeds = []
@@ -52,12 +61,19 @@ class Webhook:
             raise ValueError(f"Webhook authorization error: { message }")
 
     def message(self, content=None, username=None, avatar_url=None, tts=False):
-        """
-        Generates Message JSON
-        Keyword Arguments:
-        content -- string -- Text to be sent as the message
-        username -- string -- The username associated with Discord message
-        avatar_url -- string -- URL for the avatar displayed with the message
+        """Generates the message JSON for the Discord Webhook.
+
+        Parameters:
+            content (string): Message content sent through Discord Webhook.
+            username (string): Username to override the Discord Webhook name.
+            avatar_url (string): URL to override the Discord Webhook Avatar.
+            tts (boolean): True/False execution of Text-to-Speech message.
+
+        Instance Attributes:
+            content (string): Message content sent through Discord Webhook.
+            username (string): Username to override the Discord Webhook name.
+            avatar_url (string): URL to override the Discord Webhook Avatar.
+            tts (boolean): True/False execution of Text-to-Speech message.
         """
         self.content = None if content is None else str(content)
         self.username = None if username is None else str(username)
@@ -65,13 +81,16 @@ class Webhook:
         self.tts = True if tts is True else False
 
     def embed(self, title=None, description=None, url=None, color=None):
-        """
-        Adds a Discord Embed object to the message
-        Keyword Arguments:
-        title -- string -- Text to be sent as embed title
-        description -- string -- text to be sent and embed description
-        url -- string -- URL the embed redirects too
-        color -- hex -- Hex code of color to be used for embed
+        """Adds a Discord embed object to the message.
+
+        Parameters:
+            title (string): Text set as the embed object title.
+            description (string): Text set as the embed object description.
+            url (string): URL the embed object links too.
+            color (int - hex): Specifies color to send along embed object.
+
+        Instance Attributes:
+            embeds (list): Embed objects to be included in Discord message.
         """
         json = {}
 
@@ -83,10 +102,22 @@ class Webhook:
         self.embeds.append(json)
 
     def execute(self, wait=False):
-        """
-        Executes the Discord Webhook
-        Keyword Arguments:
-        wait -- boolean -- True returns json verifying message
+        """Executes the Discord Webhook via a POST.
+
+        Parameters:
+            wait (boolean): .
+
+        Returns:
+            requests.post object.
+
+        Instance Attributes:
+            channel_id (string): Channel ID of the Discord Webhook.
+            token (string): Token of the Discord Webhook.
+            content (string): Message content sent through Discord Webhook.
+            username (string): Username to override the Discord Webhook name.
+            avatar_url (string): URL to override the Discord Webhook Avatar.
+            tts (boolean): True/False execution of Text-to-Speech message.
+            embeds (list): Embed objects to be included in Discord message.
         """
         # Call Parameters
         url = f"{ discord_endpoint }/{ self.channel_id }/{ self.token }"
@@ -122,13 +153,18 @@ class Webhook:
         return requests.post(url, headers=header, json=json_data)
 
     def clear(self):
-        """
-        Keeps the Webhook initialized but clears all variables
-        Keyword Arguments:
-        None
+        """Clears all Instance Attributes.
+
+        Parameters:
+            None
+
+        Instance Attributes:
+            embeds (list): Embed objects to be included in Discord message.
         """
         # Resets self.embends
         self.embeds = []
 
         # Sets message to None
         self.message()
+
+help(Webhook)
