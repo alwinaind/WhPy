@@ -120,3 +120,15 @@ class Webhook:
         url = f"{ url }?wait=true" if wait is True else url
 
         return requests.post(url, headers=header, json=json_data)
+
+    def clear(self):
+        """
+        Keeps the Webhook initialized but clears all variables
+        Keyword Arguments:
+        None
+        """
+        # Resets self.embends
+        self.embeds = []
+
+        # Sets message to None
+        self.message()
