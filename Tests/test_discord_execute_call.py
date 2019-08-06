@@ -46,7 +46,7 @@ def test_message_not_called():
 
         hook.execute()
 
-    assert "Missing required argument: 'content'" in str(exception_info.value)
+    assert "Missing required arguments:" in str(exception_info.value)
 
 
 def test_message_call_empty():
@@ -63,7 +63,7 @@ def test_message_call_empty():
 
         hook.execute()
 
-    assert "Missing required argument: 'content'" in str(exception_info.value)
+    assert "Missing required arguments:" in str(exception_info.value)
 
 
 def test_message_data():
