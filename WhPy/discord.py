@@ -16,6 +16,9 @@ class Webhook:
         channel_id -- string -- Discord Channel ID
         token -- string -- Discord Webhook Token
         """
+        # Sets embeds to use with embeds() call
+        self.embeds = []
+
         # Ensures variables are not None
         if not url and not all([channel_id, token]):
 
@@ -61,32 +64,53 @@ class Webhook:
         self.avatar_url = None if avatar_url is None else str(avatar_url)
         self.tts = True if tts is True else False
 
+    def embed(self, title=None, description=None, url=None, color=None):
+        """
+        Adds a Discord Embed object to the message
+        Keyword Arguments:
+        none
+        """
+        json = {}
+
+        json["title"] = None if title is None else str(title)
+        json["description"] = None if description is None else str(description)
+        json["url"] = None if url is None else str(url)
+        json["color"] = None if color is None else int(color, 16)
+
+        self.embeds.append(json)
+
     def execute(self, wait=False):
         """
         Executes the Discord Webhook
         Keyword Arguments:
         wait -- boolean -- True returns json verifying message
         """
-        try:
-
-            if self.content is None:
-
-                raise TypeError("Missing required argument: 'content'")
-
-        except AttributeError:
-
-            raise TypeError("Missing required argument: 'content'")
-
         # Call Parameters
         url = f"{ discord_endpoint }/{ self.channel_id }/{ self.token }"
         header = {"Content-Type": "application/json"}
 
         json_data = {}
 
-        json_data["content"] = self.content
-        json_data["username"] = self.username
-        json_data["avatar_url"] = self.avatar_url
-        json_data["tts"] = self.tts
+        try:
+
+            json_data["content"] = self.content
+            json_data["username"] = self.username
+            json_data["avatar_url"] = self.avatar_url
+            json_data["tts"] = self.tts
+
+        except AttributeError:
+
+            self.message()
+
+        if all((self.content is None, len(self.embeds) == 0)):
+
+            raise TypeError(
+                "Missing required arguments: 'content' or 'embeds'"
+            )
+
+        if len(self.embeds) > 0:
+
+            json_data["embeds"] = self.embeds
 
         url = f"{ url }?wait=true" if wait is True else url
 
