@@ -68,7 +68,10 @@ class Webhook:
         """
         Adds a Discord Embed object to the message
         Keyword Arguments:
-        none
+        title -- string -- Text to be sent as embed title
+        description -- string -- text to be sent and embed description
+        url -- string -- URL the embed redirects too
+        color -- hex -- Hex code of color to be used for embed
         """
         json = {}
 
@@ -91,6 +94,7 @@ class Webhook:
 
         json_data = {}
 
+        # Checks to see if message() has been called
         try:
 
             json_data["content"] = self.content
@@ -102,6 +106,7 @@ class Webhook:
 
             self.message()
 
+        # If self.content and self.embeds not set
         if all((self.content is None, len(self.embeds) == 0)):
 
             raise TypeError(
