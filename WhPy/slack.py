@@ -49,6 +49,10 @@ class Webhook:
 
             json_data["text"] = self.content
 
-            requests.post(self.url, headers=header, json=json_data)
+            return requests.post(self.url, headers=header, json=json_data)
+
+        raise TypeError(
+            "Missing required arguments: 'content'"
+        )
 
 help(Webhook)
