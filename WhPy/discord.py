@@ -166,5 +166,3 @@ class Webhook:
 
         # Sets message to None
         self.message()
-
-help(Webhook)
