@@ -54,5 +54,3 @@ class Webhook:
         raise TypeError(
             "Missing required arguments: 'content'"
         )
-
-help(Webhook)
